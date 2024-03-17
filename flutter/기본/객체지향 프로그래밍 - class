@@ -1,0 +1,423 @@
+// class 정의 
+
+class 클래스 이름 {
+    변수 
+    함수 
+}
+
+클래스 가지고 인스턴스를 무한하게 만들수 있음 
+
+class - 설계서 , instance - 결과물 
+
+ex) 아이돌 클래스를 만들면 블랙핑크 , 스키즈 등 인스턴스 무한하게 만들수 있다 
+
+
+class Idol {
+String name = '블랙핑크';
+List<String> members = ['지수','제니','리사','로제'];
+
+
+void sayHello(){
+    print('안녕하세요 블랙핑크 입니다');
+}
+
+void introduce(){
+    print('저희 멤버는 지수,제니,리사,로제 입니다');
+}
+
+
+}
+
+void main(){
+    Idol blackpink = Idol(); -> new 안넣어도 됨 
+}
+
+new 란 ?  
+
+new 연산자로 생성된 객체는 똑같은 값을 가진(?) 객체가 있어도 서로 다른 메모리를 할당하기 때문에 서로 다른 객체로 분류된다.
+
+public class Main {
+	
+	public static void main(String[] args) {
+		String str = new String("string");
+		String str2 = new String("string");
+	}
+	
+} 
+처음에 생성한 "string"을 가르키지 않고 Heap 메모리에 새로운 영역을 할당받아 생성한다 
+    * 메모리주소가 다르게 나온다 
+	String str -> new String("string");
+	String str2 -> new String("string");
+
+
+construct - 생성자
+
+class Idol {
+String name 
+List<String> members 
+
+// constructor 생성자 - 외부에서 받아서 넣을 수 있다
+// this는 현재 클래스의 name , members 말함 
+
+Idol(
+String name,
+List<String> members
+
+) : this.name= name, 
+this.members = members; 
+-> 간단하게 
+
+Idol(
+this.name,
+this.members
+) 
+이렇게만 써도 됨 
+
+
+void sayHello(){
+    print('안녕하세요 ${this.name} 입니다');
+}
+
+void introduce(){
+    print('저희 멤버는  ${this.member} 입니다');
+}
+
+
+void main(){
+    Idol blackpink = Idol(
+    '블랙핑크',
+    ['지수','제니','리사','로제'];
+    );
+
+     Idol gIdle = Idol(
+    '여자아이들',
+    ['소연','우기','미연','민니','슈화'];
+    );
+
+}
+
+void main(){
+    Idol blackpink = Idol(
+    '블랙핑크',
+    ['지수','제니','리사','로제'];
+    );
+
+    Idol blackpink2 = Idol(
+    '블랙핑크',
+    ['지수','제니','리사','로제'];
+    );
+   
+   안에 값이 같아도 다른 인스턴스라고 파악함 
+
+  Idol blackpink =const Idol(
+    '블랙핑크',
+    ['지수','제니','리사','로제'];
+    );
+
+    Idol blackpink2 =const  Idol(
+    '블랙핑크',
+    ['지수','제니','리사','로제'];
+    );
+
+    하지만 const 붙으면 같은 인스턴스라고 파악함
+}
+
+.
+.
+named constructor 
+Idol({
+required this.name,
+required this.members
+}) 
+
+.
+.
+
+
+void main(){
+    Idol blackpink = Idol(
+   name:  '블랙핑크',
+   member: ['지수','제니','리사','로제'];
+    );
+}
+
+
+// getter -> 데이터를 가져올때 
+// setter -> 데이터를 설정,바꿀때 
+
+
+class Idol {
+String name 
+List<String> members 
+
+
+Idol(
+this.name,
+this.members
+) 
+
+void sayHello(){
+    print('안녕하세요 ${this.name} 입니다');
+}
+
+void introduce(){
+    print('저희 멤버는  ${this.member} 입니다');
+
+// getter 
+ String get firstMember{
+   return this.members[0]; 
+}
+
+// setter -> 무조건 한개의 파라미터만 들어감 
+set firstMember( String name ){
+ this.members[0] = name; 
+}
+
+}
+
+
+void main(){
+    Idol blackpink = Idol(
+    '블랙핑크',
+    ['지수','제니','리사','로제'];
+    );
+
+// getter 간단한 데이터를 가져올때
+
+print(blackpink.firstMember);
+-> 지수가 나옴 
+
+// setter final 쓰면 못 바꿈, list는 상관없음,단 전체 리스트는 못바꿈 =>
+현대 프로그래밍은 setter를 잘 안씀 
+
+blackpink.firstMember = '숭어'
+print(blackpink.firstMember);
+-> 숭어가 나옴 
+
+
+}
+
+프라이빗 하게 만들고 싶으면 class 이름 앞에 _붙이면 된다.
+=> 똑같은 파일에만 쓸수 있음 
+
+
+// 상속 - inheritance
+상속을 받으면 부모 클래스의 모든 속성을 
+자식 클래스가 받는다 
+
+
+class Idol {
+String name 
+int membersCount 
+
+
+Idol(
+{
+ required this.name;
+ required this.membersCount   
+}
+);  
+
+void sayHello(){
+    print('안녕하세요 ${this.name} 입니다');
+}
+
+void sayMembersCount(){
+    print('${this.name}은 ${this.count}명의 멤버가 있습니다');
+
+
+}
+
+
+void main(){
+    print('-------Idol -------')
+    Idol blackpink = Idol(
+    name:'에이핑크',memberCounts:5
+    );
+
+
+  BoyGroup bts = BoyGroup('bts',7)
+  =>지정 안해도 부모 상속받은거 사용 가능 
+  => 하지만 자식 껀 부모에게 상속 불가능
+  => 상속받으면 부모 타입도 true 가됨 
+  bts is Idol // true
+}
+
+
+class BoyGroup extends Idol{
+
+-> 아이돌 생성자를 명시 해줘야 한다 
+BoyGroup(
+String name,
+int membersCount
+) : super(this.name : name, this.membersCount : membersCount);  
+
+void sayName (){
+    print('하이요')
+}
+
+}
+
+
+// method - function (class 내부에 있는 함수 )
+
+void main (){
+TimesTwo tt = TimesTwo(2); =>4
+TimesFour tt2 = TimesFour(2); => 8
+
+}
+
+class TimesTwo {
+
+    final int number;
+    TimesTwo(int number) ;
+
+    // method
+    int calculate(){
+        return number * 2 
+    }
+}
+
+class TimesFour extends TimesTwo {
+
+    TimesTwo(int number):super(number) ;
+
+    @override
+      int calculate(){
+
+        // super로 메소드나 속성들을 가져올수 있다. 
+        return super.number * 4; => 정석
+        => return this.number * 4;
+    }
+
+// override - 덮어쓰다 (우선시하다)
+
+      @override 
+      int calculate(){
+        return super.calculate() * 2 ;
+
+        => this 는 안됨 TimesFour의 calculate를 무한하게 부르기 때문이다
+    }
+
+
+}
+
+// static
+
+void main(){
+Employee seulgi = Employee('슬기')
+Employee soonger = Employee('숭어')
+
+final String name; 로 설정 안했으면 
+seulgi.name = '코드팩토리' 가능 이런걸 인스턴스에 귀속된다고 한다.
+
+Employee.buiding = 'sm';
+
+seulgi.printNameAndBuilding();
+soonger.printNameAndBuilding(); 
+=> 둘다 같은 건물 이름이 나옴 
+
+}
+
+class Employee {
+    // 인스턴스에 귀속되는게 아니라 클래스에 귀속한다.
+    static String? buiding; 
+    final String name; 
+
+ Employee(
+    this.name,
+
+ )
+
+ void printNameAndBuilding(){
+
+    print ('제 이름은 $name 이고 $building 에서 일합니다 ')
+ }
+
+  static void printBuilding(){
+
+    print ('$building 건물에서 근무중입니다')
+ }
+
+}
+
+인스턴스에 귀속된다는것은 인스턴스를 만들고 실행하거나 값을 바꿀수 있다는 것이다  
+ex) seulgi.printNameAndBuilding();
+
+클래스에 귀속된다는것은 클래스에 .다이렉트로 실행하거나 값을 바꿀수 있다는 것이다 
+ex) Employee.buiding = 'sm';
+
+
+//interface 
+
+class IdolInterface{
+String name; 
+
+IdolInterface(this.name)
+void sayName(){}
+}
+
+=> 인터페이스 쓰는 법 
+
+인터페이스랑 형식 안 맞춰 주면 에러난다 
+다른 개발자랑 따로 소통을 안해도 인터페이스를 만들면 어떤 값들을 넣어놔야하는지 알수 있다
+
+class BoyGroup implements IdolInterface {
+String name; 
+BoyGroup (this.name);
+void sayName(){
+print
+('제이름은 $name 입니다')
+}
+}
+
+void main(){
+  
+ IdolInterface test = IdolInterface('DD')
+ => 인스턴스화 하라고 만들게 아니라서 인스턴스를 만들면 문제가 될 수 있다. 
+ abstract로 만들면 인스턴스 만들면 에러남 
+
+}
+
+그럴 땐 
+abstract 사용하면 인스턴스를 못하게 막는다. 
+
+abstract class IdolInterface{
+String name; 
+
+IdolInterface(this.name)
+void sayName();
+-> 추상적이기 때문에 함수의 바디를 지워도된다. 
+}
+
+
+// 
+
+// generic - 타입을 외부에서 받을 때 
+
+class Lecture<T, X> {
+final T id;
+final X name;
+
+Lecture(this.id, this.name);
+
+}
+
+void Main (){
+
+Lecture<String,int> lecture1 = Lecture('123',000)
+
+}
+
+// 객체지향 프로그래밍 
+
+void main() {
+
+Test test = Test();
+test. 아무것도 안넣어도 4개가 있다 
+모든 클래스는 오브젝트를 상속하기 때문이다
+모든 클래스는 최상위 부모를 상속받고 있다 . 
+}
+
+class Test {}
+class Test extends Object {} 모든 클래스는 오브젝트를 상속한다 

@@ -1,0 +1,5 @@
+parameter / argument - 매개변수 
+positional parameter - 순서가 중요한 파라미터 (x,y,z)
+optional parameter - 있어도 되고 없어도 되는 파라미터 (x, [y,z])
+named parameter - 이름이 있는 파라미터 (순서가 중요하지 않다) ({x, y, z})
+
