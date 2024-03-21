@@ -1,0 +1,33 @@
+아키텍처 패턴은 공통적인 문제 발생에 대해 일반적인 그리고 재사용 가능한 해결책을 의미하며 디자인 패턴과 다른 점은 디자인 패턴은 특정 유형의 문제에 초점을 두는 반면 이 아키텍처 패턴은 전반적인 문제 해결 방법이다.
+MVVM은 기존의 MVC, MVP 패턴을 보완하기 위한 패턴으로, 기존의 MVC는 Model View Controller, MVP는 Model View Presenter로 구성되어 있는 반면, MVVM은 Model, View, ViewModel로 구성되어 있다.
+ 
+
+MVC(Model View Controller)
+Controller에서 사용자의 입력 -> Model 업데이트 -> View는 Model를 통해 View를 업데이트- 단순하지만 View와 Model이 서로 의존성이 높음
+
+
+MVP(Model View Presenter)
+View에서 사용자의 입력 -> Presenter에서 Model 업데이트 -> Presenter를 통해 View 업데이트- View와 Model의 의존성은 분리되어 있으나 View와 Presenter의 의존성이 높아짐
+
+
+MVVM(Model View ModelView)
+View에서 사용자의 입력을 ViewModel로 전달 -> ViewModel에서 Model로 데이터 요청 및 처리 ->
+View는 ViewModel를 Provider나 Stream 등을 통하여 구독하거나 데이터 상태 관리를 통해 View를 업데이트
+- View와 Model의 의존성이 없음
+- View와 ViewModel은 서로 양방향 소통이 아니므로 여러 View가 ViewModel 하나를 참조할 수 있음
+
+View
+사용자에게 보여지는 영역
+
+ViewModel
+View의 상태를 관리하고 View의 비즈니스 로직을 담당
+
+Repository
+데이터 저장소라는 뜻으로 DataLayer인 DataSource에 접근
+
+DataSource
+데이터를 가져오는 영역
+
+Model
+데이터 설계
+
